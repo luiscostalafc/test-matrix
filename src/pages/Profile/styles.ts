@@ -58,7 +58,7 @@ export const AvatarInput = styled.div`
     position: absolute;
     width: 48px;
     height: 48px;
-    background: #ff9000;
+    background: #48FF02;
     border: none;
     border-radius: 50%;
     right: 0;
@@ -72,7 +72,7 @@ export const AvatarInput = styled.div`
       display: none;
     }
     &:hover {
-      background: ${shade(0.2, '#ff9000')};
+      background: ${shade(0.2, '#48FF02')};
     }
     svg {
       color: #312e38;

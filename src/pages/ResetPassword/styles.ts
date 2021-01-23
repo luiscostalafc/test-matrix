@@ -54,7 +54,7 @@ export const AnimationContainer = styled.div`
     }
   }
   > a {
-    color: #ff9000;
+    color: #48FF02;
     display: block;
     margin-top: 24px;
     text-decoration: none;
@@ -65,11 +65,11 @@ export const AnimationContainer = styled.div`
       margin-right: 16px;
     }
     &:hover {
-      color: ${shade(0.2, '#ff9000')};
+      color: ${shade(0.2, '#48FF02')};
     }
   }
   button {
-    background: #ff9000;
+    background: #48FF02;
     height: 56px;
     border-radius: 10px;
     border: 0;
@@ -80,7 +80,7 @@ export const AnimationContainer = styled.div`
     margin-top: 16px;
     transition: background-color 0.2s;
     &:hover {
-      background: ${shade(0.2, '#ff9000')};
+      background: ${shade(0.2, '#48FF02')};
     }
   }
 `;
