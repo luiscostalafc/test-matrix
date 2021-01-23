@@ -8,12 +8,11 @@ import logoImg from '../../assets/logo.svg';
 import { Title, Form, Repositories, Error } from './styles';
 
 interface Repository {
-  full_name: string;
+  repositories?: any;
+  username: string;
   description: string;
-  owner: {
-    login: string;
-    avatar_url: string;
-  };
+  stargazers_count: number;
+  language: string;
 }
 
 const Dashboard: React.FC = () => {
@@ -43,24 +42,23 @@ useEffect(() => {
   ): Promise<void> {
     event.preventDefault();
     if (!newRepo) {
-      setInputError('Digite o autor/nome de repositório');
+      setInputError('Digite a linguagem repositório');
       return;
     }
 
     try {
-    const response = await api.get<Repository>(`repos/${newRepo}`);
+    const response = await api.get<Repository>(`/legacy/repos/search/${newRepo}?language=${newRepo}`);
 
-    const repository = response.data;
+    const repository = response.data.repositories;
 
     setRepositories([...repositories, repository]);
     setNewRepo('');
     setInputError('');
 
     } catch (err) {
-      setInputError('Erro na busca por esse repositório');
+      setInputError('Erro na busca por essa linguagem');
 
     }
-
 
   }
 
@@ -72,7 +70,7 @@ useEffect(() => {
         <input
           value={newRepo}
           onChange={e => setNewRepo(e.target.value)}
-          placeholder="Digite o nome de repositório"
+          placeholder="Digite o nome da linguagem"
         />
         <button type="submit">Pesquisar</button>
       </Form>
@@ -81,13 +79,9 @@ useEffect(() => {
 
       <Repositories>
         {repositories.map(repository => (
-          <Link key={repository.full_name} to= {`/repositories/${repository.full_name}`}>
-          <img
-            src={repository.owner.avatar_url}
-            alt={repository.owner.login}
-          />
-          <div>
-            <strong>{repository.full_name}</strong>
+          <Link key={repository.language} to= {`/repositories/${repository.username}`}>
+          <div key={repository.username}>
+            <strong>{repository.username}</strong>
             <p>{repository.description}</p>
           </div>
 

@@ -30,11 +30,9 @@ export default function ComparatorSortingGrid() {
   const [repositories, setRepositories] = useState<Repository[] | any>([]);
 
   useEffect(() => {
-    api.get('/search/repositories?q=0..*?language').then(response => {
+    api.get('/search/repositories?q=*?language').then(response => {
       setRepositories(response.data.items);
     });
-
-
   },[])
 
 
@@ -42,7 +40,7 @@ export default function ComparatorSortingGrid() {
     <div style={{ height: 400, width: '100%', marginTop:150}}>
 
 
-    <DataTable title="Github" style={{ padding: 10}} data={repositories} columns={columns} options={{ filtering: true, }} />
+    <DataTable title="Github" style={{ padding: 10}} data={repositories} columns={columns} />
 
     </div>
   );
