@@ -21,8 +21,8 @@ const columns = [
   { title: 'Estrelas', field: 'stargazers_count'},
   { title: 'Linguagem', field: 'language'},
   { title: 'Issues', field: 'issues'},
-  { title:'Usuário', field: 'dfdkf',  },
-  { title:'Avatar', field: 'dkdfkdkf', }
+  { title:'Usuário', field: 'owner.login',  },
+  { title:'Avatar', field: 'owner.avatar_url', }
 ];
 
 
