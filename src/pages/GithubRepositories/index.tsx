@@ -8,48 +8,41 @@ interface Repository {
   description: string;
   stargazers_count: number;
   language: string;
-  open_issues_count: number;
   owner: {
     login: string;
     avatar_url: string;
   };
 }
 
-const columns = [
-  { title: 'Nome', field: 'full_name' },
-  { title: 'Descrição', field: 'description'},
-  { title: 'Estrelas', field: 'stargazers_count'},
-  { title: 'Linguagem', field: 'language'},
-  { title: 'Issues', field: 'issues'},
-  { title:'Usuário', field: 'owner.login',  },
-  { title:'Avatar', field: 'owner.avatar_url', }
+const columns= [
+  { field: 'language', title: 'Linguagem'},
+  { field: 'full_name', title: 'Nome'},
+  { field: 'description', title: 'Descrição'},
+  { field: 'stargazers_count', title: 'Estrelas'},
+  { field: 'owner.login', title:'Usuário' },
+  { title:'Avatar', render: (row: any) => (
+    <img style={{ borderRadius:'50%'}} width='50px' height="50" src={row.owner.avatar_url} alt="Imagem do Avatar"/>
+  )}
 ];
-
-
 
 
 export default function ComparatorSortingGrid() {
   const [repositories, setRepositories] = useState<Repository[] | any>([]);
 
   useEffect(() => {
-    api.get('/search/repositories?q=0..*?language&sort=stars&order=asc&page=1&per_page=10').then(response => {
-      setRepositories(response.data);
+    api.get('/search/repositories?q=0..*?language').then(response => {
+      setRepositories(response.data.items);
     });
 
 
   },[])
 
+
   return (
-    <div style={{ height: 400, width: '100%', marginTop:200}}>
+    <div style={{ height: 400, width: '100%', marginTop:150}}>
 
-    <DataTable
 
-    data={repositories}
-    columns={columns}
-    options={{
-      filtering: true
-    }}
-     />
+    <DataTable title="Github" style={{ padding: 10}} data={repositories} columns={columns} options={{ filtering: true, }} />
 
     </div>
   );
