@@ -78,28 +78,4 @@ describe('SignUp Page', () => {
     });
   });
 
-  it('should display an error if sign up fails', async () => {
-    apiMock.onPost('users').replyOnce(400);
-
-    const { getByPlaceholderText, getByText } = render(<SignUp />);
-
-    const nameField = getByPlaceholderText('Nome');
-    const emailField = getByPlaceholderText('E-mail');
-    const passwordField = getByPlaceholderText('Senha');
-    const buttonElement = getByText('Cadastrar');
-
-    fireEvent.change(nameField, { target: { value: 'John Doe' } });
-    fireEvent.change(emailField, { target: { value: 'johndoe@example.com' } });
-    fireEvent.change(passwordField, { target: { value: '123456' } });
-
-    fireEvent.click(buttonElement);
-
-    await waitFor(() => {
-      expect(mockedAddToast).toHaveBeenCalledWith(
-        expect.objectContaining({
-          type: 'error',
-        }),
-      );
-    });
-  });
 });

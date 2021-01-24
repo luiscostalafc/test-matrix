@@ -26,7 +26,7 @@ jest.mock('../../hooks/toast', () => {
   };
 });
 
-jest.mock('../../hooks/auth', () => {
+jest.mock('../../hooks/Auth/auth', () => {
   return {
     useAuth: () => ({
       updateUser: mockedUpdateUser,

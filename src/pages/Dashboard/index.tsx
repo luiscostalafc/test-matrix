@@ -1,8 +1,11 @@
 import React, { useState, useEffect, FormEvent } from 'react';
 import { ArrowBack } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
-import apiGithub from '../../services/apiGithub';
 import DataTable from "material-table";
+import { useAuth } from '../../hooks/Auth/auth';
+
+import apiGithub from '../../services/apiGithub';
+import api from '../../services/api';
 
 import logoImg from '../../assets/github-background.svg';
 
@@ -13,22 +16,26 @@ interface Repository {
   language: string;
   name: any;
   description: string;
-  stargazers_count: number;
+  score: string
   username: string;
+  url: string;
 }
 
 const columns = [
   { field: 'language', title: 'Linguagem' },
   { field: 'name', title: 'Repositório' },
   { field: 'description', title: 'Descrição' },
-  { field: 'stargazers_count', title: 'Estrelas' },
-  { field: 'username', title: 'Usuário' }
+  { field: 'score', title: 'Score' },
+  { field: 'username', title: 'Usuário' },
+  { field: 'url', tilte: 'Url'}
 ];
 
 const Dashboard: React.FC = () => {
   const [newRepo, setNewRepo] = useState('');
   const [inputError, setInputError] = useState('');
   const [repositories, setRepositories] = useState<Repository[]>(() => {
+
+
     const storagedRepositories = localStorage.getItem(
       '@GithubExplorer:repositories',
     );
@@ -39,15 +46,17 @@ const Dashboard: React.FC = () => {
     return [];
   });
 
-useEffect(() => {
-  localStorage.setItem(
-    '@GithubExplorer:repositories',
-    JSON.stringify(repositories),
-  )
+  useEffect(() => {
+    localStorage.setItem(
+      '@GithubExplorer:repositories',
+      JSON.stringify(repositories),
+    )
 
-}, [repositories])
+  }, [repositories])
 
-  async function handleAddRepository(
+  const { token } = useAuth()
+
+  async function handleSearchRepository(
     event: FormEvent<HTMLFormElement>,
   ): Promise<void> {
     event.preventDefault();
@@ -57,13 +66,14 @@ useEffect(() => {
     }
 
     try {
-    const response = await apiGithub.get<Repository>(`/legacy/repos/search/${newRepo}?language=${newRepo}`);
+      const response = await apiGithub.get<Repository>(`/legacy/repos/search/${newRepo}?language=${newRepo}`);
 
-    const repository = response.data.repositories;
+      const repository = response.data.repositories;
+      api.defaults.headers.authorization = `Bearer ${token}`;
 
-    setRepositories(repository);
-    setNewRepo('');
-    setInputError('');
+      setRepositories(repository);
+      setNewRepo('');
+      setInputError('');
 
     } catch (err) {
       setInputError('Erro na busca por essa linguagem, tente novamente');
@@ -74,22 +84,22 @@ useEffect(() => {
 
   return (
     <>
-    <Header>
+      <Header>
         <HeaderContent>
 
           <Link to="/github-repositories">
-          <button type="button">
-            <ArrowBack />
-            <strong>Voltar</strong>
-          </button>
+            <button type="button">
+              <ArrowBack />
+              <strong>Voltar</strong>
+            </button>
           </Link>
         </HeaderContent>
       </Header>
 
 
-      <img style={{ width:100, height:100 }} src={logoImg} alt="Github Explore" />
+      <img style={{ width: 100, height: 100 }} src={logoImg} alt="Github Explore" />
       <Title>Explore repositórios no Github</Title>
-      <Form hasError={!!inputError} onSubmit={handleAddRepository}>
+      <Form hasError={!!inputError} onSubmit={handleSearchRepository}>
         <input
           value={newRepo}
           onChange={e => setNewRepo(e.target.value)}
@@ -98,9 +108,9 @@ useEffect(() => {
         <button type="submit">Pesquisar</button>
       </Form>
 
-      { inputError && <Error>{inputError}</Error> }
+      { inputError && <Error>{inputError}</Error>}
 
-      <div style={{ height: 400, width: '100%', marginTop: 100}}>
+      <div style={{ height: 400, width: '100%', marginTop: 100 }}>
 
         <DataTable title="Github" style={{ padding: 10 }} data={repositories} columns={columns} />
 

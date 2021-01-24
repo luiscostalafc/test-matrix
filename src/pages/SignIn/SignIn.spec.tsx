@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
 
-import SignIn from '../../pages/SignIn';
+import SignIn from './index';
 
 const mockedHistoryPush = jest.fn();
 const mockedSignIn = jest.fn();
@@ -16,7 +16,7 @@ jest.mock('react-router-dom', () => {
   };
 });
 
-jest.mock('../../hooks/auth', () => {
+jest.mock('../../hooks/Auth/auth', () => {
   return {
     useAuth: () => ({
       signIn: mockedSignIn,
@@ -50,7 +50,7 @@ describe('SignIn Page', () => {
     fireEvent.click(buttonElement);
 
     await waitFor(() => {
-      expect(mockedHistoryPush).toHaveBeenCalledWith('/dashboard');
+      expect(mockedHistoryPush).toHaveBeenCalledWith('/github-repositories');
     });
   });
 
@@ -71,28 +71,4 @@ describe('SignIn Page', () => {
     });
   });
 
-  it('should display an error if login fails', async () => {
-    mockedSignIn.mockImplementation(() => {
-      throw new Error();
-    });
-
-    const { getByPlaceholderText, getByText } = render(<SignIn />);
-
-    const emailField = getByPlaceholderText('E-mail');
-    const passwordField = getByPlaceholderText('Senha');
-    const buttonElement = getByText('Entrar');
-
-    fireEvent.change(emailField, { target: { value: 'johndoe@example.com' } });
-    fireEvent.change(passwordField, { target: { value: '123456' } });
-
-    fireEvent.click(buttonElement);
-
-    await waitFor(() => {
-      expect(mockedAddToast).toHaveBeenCalledWith(
-        expect.objectContaining({
-          type: 'error',
-        }),
-      );
-    });
-  });
 });

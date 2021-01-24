@@ -116,7 +116,7 @@ describe('Auth hook', () => {
     });
 
     expect(setItemSpy).toHaveBeenCalledWith(
-      '@GoBarber:user',
+      '@GithubExplorer:user',
       JSON.stringify(user),
     );
 

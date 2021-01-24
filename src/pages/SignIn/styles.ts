@@ -46,6 +46,7 @@ export const AnimationContainer = styled.div`
       color: #FFFFFF;
       display: block;
       margin-top: 24px;
+      margin-bottom: -30px;
       text-decoration: none;
       transition: color 0.2s;
       &:hover {
@@ -56,7 +57,7 @@ export const AnimationContainer = styled.div`
   > a {
     color: #48FF02;
     display: block;
-    margin-top: 24px;
+    margin-top: -30px;
     text-decoration: none;
     transition: color 0.2s;
     display: flex;

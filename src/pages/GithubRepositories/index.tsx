@@ -8,6 +8,7 @@ import { FiPower, FiSearch } from 'react-icons/fi';
 import { Container, Header, HeaderContent, Profile } from './styles'
 
 import apiGithub from '../../services/apiGithub';
+import api from '../../services/api';
 
 interface Repository {
   full_name: string;
@@ -41,10 +42,10 @@ export default function ComparatorSortingGrid() {
 
   useEffect(() => {
     apiGithub.get('/search/repositories?q=0..*?language').then(response => {
-      apiGithub.defaults.headers.authorization = `Bearer ${token}`;
+      api.defaults.headers.authorization = `Bearer ${token}`;
       setRepositories(response.data.items);
     });
-  }, [])
+  }, [token])
 
 
   return (
@@ -68,7 +69,7 @@ export default function ComparatorSortingGrid() {
             <div style={{ marginLeft: '200px' }}>
               <Link to="/dashboard">
                 <button type="button">
-                  Refinar busca
+                  Busca por linguagem
                   <FiSearch color='#312e38' style={{ marginLeft: -25 }} />
                 </button>
               </Link>
