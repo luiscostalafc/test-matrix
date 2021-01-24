@@ -7,7 +7,7 @@ interface FormProps {
 
 export const Title = styled.h1 `
 font-size: 48px;
-color: #3A3A3A;
+color: #fff;
 max-width: 450px;
 line-height: 56px;
 
@@ -42,7 +42,7 @@ export const Form = styled.form<FormProps> `
  button {
    width: 210px;
    height: 70px;
-   background: #04d361;
+   background: #48FF02;
    border-radius: 0px 5px 5px 0px;
    border: 0;
    color: #fff;
@@ -50,7 +50,7 @@ export const Form = styled.form<FormProps> `
    transition: background-color 0.2s;
 
    &:hover {
-     background: ${shade(0.2, '#04d361')}
+     background: ${shade(0.2, '#48FF02')}
    }
  }
 
@@ -88,8 +88,8 @@ export const Repositories = styled.div `
     }
 
     img {
-      width: 64px;
-      height: 64px;
+      width: 54px;
+      height: 54px;
       border-radius: 50%;
     }
 

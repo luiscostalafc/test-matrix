@@ -3,7 +3,7 @@ import { FiChevronRight } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import apiGithub from '../../services/apiGithub';
 
-import logoImg from '../../assets/logo.svg';
+import logoImg from '../../assets/github-background.svg';
 
 import { Title, Form, Repositories, Error } from './styles';
 
@@ -64,7 +64,7 @@ useEffect(() => {
 
   return (
     <>
-      <img src={logoImg} alt="Github Explore" />
+      <img style={{ width:100, height:100 }} src={logoImg} alt="Github Explore" />
       <Title>Explore repositórios no Github</Title>
       <Form hasError={!!inputError} onSubmit={handleAddRepository}>
         <input
