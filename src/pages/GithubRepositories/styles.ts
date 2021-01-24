@@ -3,8 +3,9 @@ import styled from 'styled-components';
 export const Container = styled.div``;
 
 export const Header = styled.div`
-  padding: 32px 0;
+  padding: 22px 0;
   background: #48FF02;
+  margin-bottom: -80px;
 `;
 
 export const HeaderContent = styled.header`

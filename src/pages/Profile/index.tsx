@@ -9,7 +9,6 @@ import api from '../../services/api';
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import Input from '../../components/Input';
-import Button from '../../components/Button';
 
 import { useToast } from '../../hooks/toast';
 
@@ -147,13 +146,15 @@ const Profile: React.FC = () => {
           onSubmit={handleSubmit}
         >
           <AvatarInput>
-            <img
+
+          <img
               src={
                 user.avatar_url ||
-                'https://api.adorable.io/avatars/186/abott@adorable.io.png'
+                'https://gravatar.com/avatar/1d0df06e255a4ab0702a05a5608eacd3?s=400&d=wavatar&r=x'
               }
               alt={user.name}
             />
+
             <label htmlFor="avatar">
               <FiCamera size={20} />
               <input
@@ -165,7 +166,6 @@ const Profile: React.FC = () => {
             </label>
           </AvatarInput>
 
-          <h1>Meu Perfil</h1>
 
           <Input name="name" icon={FiUser} placeholder="Nome" />
 
@@ -190,9 +190,9 @@ const Profile: React.FC = () => {
             type="password"
             placeholder="Confirmar senha"
           />
-
-          <Button type="submit">Confirmar mudanças</Button>
+           <button type="submit">Confirmar mudanças</button>
         </Form>
+
       </Content>
     </Container>
   );
