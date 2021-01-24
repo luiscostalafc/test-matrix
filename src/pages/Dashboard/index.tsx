@@ -1,11 +1,12 @@
 import React, { useState, useEffect, FormEvent } from 'react';
 import { FiChevronRight } from 'react-icons/fi';
+import { ArrowBack } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import apiGithub from '../../services/apiGithub';
 
 import logoImg from '../../assets/github-background.svg';
 
-import { Title, Form, Repositories, Error } from './styles';
+import { Title, Form, Repositories, Error, Header, HeaderContent } from './styles';
 
 interface Repository {
   repositories?: any;
@@ -64,6 +65,19 @@ useEffect(() => {
 
   return (
     <>
+    <Header>
+        <HeaderContent>
+
+          <Link to="/github-repositories">
+          <button type="button">
+            <ArrowBack />
+            <strong>Voltar</strong>
+          </button>
+          </Link>
+        </HeaderContent>
+      </Header>
+
+
       <img style={{ width:100, height:100 }} src={logoImg} alt="Github Explore" />
       <Title>Explore repositórios no Github</Title>
       <Form hasError={!!inputError} onSubmit={handleAddRepository}>

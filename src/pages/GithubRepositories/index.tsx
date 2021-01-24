@@ -65,17 +65,23 @@ export default function ComparatorSortingGrid() {
               <span>Bem-vindo, </span>
               <Link to="/profile"><strong>{user.name}</strong></Link>
             </div>
-            <div style={{ marginTop: 10, marginLeft: '200px'}}>
-                <Link to="/dashboard">
+            <div style={{ marginLeft: '200px' }}>
+              <Link to="/dashboard">
                 <button type="button">
-                  <FiSearch color='#312e38' />Refinar busca
-               </button>
-                </Link>
+                  Refinar busca
+                  <FiSearch color='#312e38' style={{ marginLeft: -25 }} />
+                </button>
+              </Link>
+            </div>
+            <div>
+                <button type="button" onClick={signOut}>
+                  Sair
+            <FiPower style={{ marginLeft: -25 }} />
+
+                </button>
               </div>
           </Profile>
-          <button type="button" onClick={signOut}>
-            <FiPower />
-          </button>
+
         </HeaderContent>
       </Header>
 

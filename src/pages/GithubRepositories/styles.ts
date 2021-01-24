@@ -47,7 +47,7 @@ export const Profile = styled.div`
       text-decoration: none;
       color: #4A5568;
       &:hover {
-        color:#CBD5E0;
+        color:#fff;
         opacity: 0.9;
       }
     }

@@ -116,3 +116,36 @@ export const Repositories = styled.div `
   }
 }
 `;
+
+export const Header = styled.div`
+  padding: 12px 0;
+  margin-bottom: 20px;
+`;
+
+export const HeaderContent = styled.header`
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  > img {
+    height: 80px;
+  }
+  button {
+    margin-left: auto;
+    background: transparent;
+    border: 0;
+    color: #fff;
+    &:hover {
+        color:'#48FF02';
+        opacity: 0.9;
+      }
+    svg {
+      color: #fff;
+      width: 100px;
+      &:hover {
+        color:'#48FF02';
+        opacity: 0.9;
+      }
+    }
+  }
+`;
