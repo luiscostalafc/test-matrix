@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { useToast } from '../../hooks/toast';
 import getValidationErrors from '../../utils/getValidationErrors';
 
-import logoImg from '../../assets/logo.svg';
+import githubLogo from '../../assets/github-background.svg';
 
 
 import Button from '../../components/Button';
@@ -85,10 +85,10 @@ const ForgotPassword: React.FC = () => {
     <Container>
       <Content>
         <AnimationContainer>
-          <img src={logoImg} alt="Github" />
+          <img src={githubLogo} alt="Github" />
 
           <Form ref={formRef} onSubmit={handleSubmit}>
-            <h1>Recuperar senha</h1>
+            <h1 style={{ color:'#FFFFFF'}}>Recuperar senha</h1>
             <Input name="email" icon={FiMail} placeholder="E-mail" />
 
             <Button loading={loading} type="submit">

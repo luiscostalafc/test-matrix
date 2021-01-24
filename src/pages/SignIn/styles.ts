@@ -43,13 +43,13 @@ export const AnimationContainer = styled.div`
       margin-bottom: 24px;
     }
     a {
-      color: #f4ede8;
+      color: #FFFFFF;
       display: block;
       margin-top: 24px;
       text-decoration: none;
       transition: color 0.2s;
       &:hover {
-        color: ${shade(0.2, '#f4ede8')};
+        color: ${shade(0.2, '#FFFFFF')};
       }
     }
   }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouteMatch, Link } from 'react-router-dom';
 import { FiChevronLeft } from 'react-icons/fi';
-import api from '../../services/api';
+import apiGithub from '../../services/apiGithub';
 
 import logoImg from '../../assets/logo.svg';
 
@@ -28,7 +28,7 @@ const Repository: React.FC = () => {
 
 
   useEffect(() => {
-    api.get(`/legacy/repos/search/${params.repository}?language=${params.repository}`).then(response => {
+    apiGithub.get(`/legacy/repos/search/${params.repository}?language=${params.repository}`).then(response => {
       setRepository(response.data.repositories);
     });
 

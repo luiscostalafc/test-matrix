@@ -1,7 +1,7 @@
 import React, { useState, useEffect, FormEvent } from 'react';
 import { FiChevronRight } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import api from '../../services/api';
+import apiGithub from '../../services/apiGithub';
 
 import logoImg from '../../assets/logo.svg';
 
@@ -47,7 +47,7 @@ useEffect(() => {
     }
 
     try {
-    const response = await api.get<Repository>(`/legacy/repos/search/${newRepo}?language=${newRepo}`);
+    const response = await apiGithub.get<Repository>(`/legacy/repos/search/${newRepo}?language=${newRepo}`);
 
     const repository = response.data.repositories;
 

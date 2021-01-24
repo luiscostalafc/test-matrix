@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import DataTable from "material-table"
 
-import api from '../../services/api';
+import apiGithub from '../../services/apiGithub';
 
 interface Repository {
   full_name: string;
@@ -30,7 +30,7 @@ export default function ComparatorSortingGrid() {
   const [repositories, setRepositories] = useState<Repository[] | any>([]);
 
   useEffect(() => {
-    api.get('/search/repositories?q=*?language').then(response => {
+    apiGithub.get('/search/repositories?q=*?language').then(response => {
       setRepositories(response.data.items);
     });
   },[])
