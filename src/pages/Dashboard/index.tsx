@@ -1,20 +1,29 @@
 import React, { useState, useEffect, FormEvent } from 'react';
-import { FiChevronRight } from 'react-icons/fi';
 import { ArrowBack } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import apiGithub from '../../services/apiGithub';
+import DataTable from "material-table";
 
 import logoImg from '../../assets/github-background.svg';
 
-import { Title, Form, Repositories, Error, Header, HeaderContent } from './styles';
+import { Title, Form, Error, Header, HeaderContent } from './styles';
 
 interface Repository {
   repositories?: any;
-  username: string;
+  language: string;
+  name: any;
   description: string;
   stargazers_count: number;
-  language: string;
+  username: string;
 }
+
+const columns = [
+  { field: 'language', title: 'Linguagem' },
+  { field: 'name', title: 'Repositório' },
+  { field: 'description', title: 'Descrição' },
+  { field: 'stargazers_count', title: 'Estrelas' },
+  { field: 'username', title: 'Usuário' }
+];
 
 const Dashboard: React.FC = () => {
   const [newRepo, setNewRepo] = useState('');
@@ -52,12 +61,12 @@ useEffect(() => {
 
     const repository = response.data.repositories;
 
-    setRepositories([...repositories, repository]);
+    setRepositories(repository);
     setNewRepo('');
     setInputError('');
 
     } catch (err) {
-      setInputError('Erro na busca por essa linguagem');
+      setInputError('Erro na busca por essa linguagem, tente novamente');
 
     }
 
@@ -91,18 +100,12 @@ useEffect(() => {
 
       { inputError && <Error>{inputError}</Error> }
 
-      <Repositories>
-        {repositories.map(repository => (
-          <Link key={repository.language} to= {`/repositories/${repository.username}`}>
-          <div key={repository.username}>
-            <strong>{repository.username}</strong>
-            <p>{repository.description}</p>
-          </div>
+      <div style={{ height: 400, width: '100%', marginTop: 100}}>
 
-          <FiChevronRight size={20} />
-        </Link>
-        ))}
-      </Repositories>
+        <DataTable title="Github" style={{ padding: 10 }} data={repositories} columns={columns} />
+
+      </div>
+
     </>
   );
 };

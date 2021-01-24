@@ -85,7 +85,7 @@ export default function ComparatorSortingGrid() {
         </HeaderContent>
       </Header>
 
-      <div style={{ height: 400, width: '100%', marginTop: 150 }}>
+      <div style={{ height: 400, width: '100%', marginTop: 100 }}>
 
         <DataTable title="Github" style={{ padding: 10 }} data={repositories} columns={columns} />
 
